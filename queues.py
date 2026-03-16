@@ -1,6 +1,6 @@
-FIFOQueue = deque # alias for FIFO queue, used in BFS (Breadth-First Search)
+FIFOQueue = deque # alias for FIFO queue, used in Breadth-First Search
 
-LIFOQueue = list # alias for LIFO queue, used in DFS (Depth-First Search)
+LIFOQueue = list # alias for LIFO queue, used in Depth-First Search
 
 class PriorityQueue:
     """A queue in which the item with minimum f(item) is always popped first."""
