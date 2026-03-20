@@ -6,7 +6,9 @@ class Problem(object):
     (or give an `is_goal` method) and perhaps other keyword args for the subclass."""
 
     def __init__(self, initial=None, goal=None, **kwds):
-        self.__dict__.update(initial=initial, goal=goal, **kwds)
+        self.initial = initial
+        self.goal = goal
+        self.__dict__.update(**kwds)
 
     def actions(self, state):        raise NotImplementedError # returns a list of actions
     def result(self, state, action): raise NotImplementedError # returns the state that results from taking an action in a state

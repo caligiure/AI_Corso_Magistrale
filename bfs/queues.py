@@ -1,3 +1,6 @@
+from collections import deque
+import heapq
+
 FIFOQueue = deque # alias for FIFO queue, used in Breadth-First Search
 
 LIFOQueue = list # alias for LIFO queue, used in Depth-First Search
