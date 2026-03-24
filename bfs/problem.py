@@ -1,3 +1,5 @@
+import math
+
 class Problem(object):
     """The abstract class for a formal problem. A new domain subclasses this,
     overriding `actions` and `results`, and perhaps other methods.
