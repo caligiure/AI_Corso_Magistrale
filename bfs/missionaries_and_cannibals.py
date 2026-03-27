@@ -62,7 +62,10 @@ def run_game(nn=3, bb=2):
         print("No solution found")
         return
     print("Solution:")
-    for (m, c, b) in path_states(solution):
+    states = path_states(solution)
+    actions = path_actions(solution)
+    for j in range(len(states)):
+        (m, c, b) = states[j]
         for i in range(m):
             print("M ", end="")
         for i in range(mc_problem.N - m):
@@ -80,10 +83,47 @@ def run_game(nn=3, bb=2):
             print("C ", end="")
         for i in range(c):
             print("  ", end="")
-        print()
+        if j<len(states)-1:
+            (mb, cb) = actions[j]
+            if b==1:
+                print(f"\tMoving {mb} missionaries and {cb} cannibals to the right bank...")
+            else:
+                print(f"\tMoving {mb} missionaries and {cb} cannibals to the left bank...")
+    print()
+    
+def test():
+    run_game(3, 2)
+    print("\n\n")
+    run_game(4, 2)
+    print("\n\n")
+    run_game(4, 3)
+    print("\n\n")
+    run_game(5, 2)
+    print("\n\n")
+    run_game(5, 3)
 
-run_game(3, 2)
-print("\n\n")
-run_game(4, 2)
-print("\n\n")
-run_game(5, 3)
+def main():
+    print("""
+    The Missionaries and Cannibals problem is a classic river crossing puzzle.
+    There are N missionaries and N cannibals on the left bank of a river.
+    There is a boat that can carry at most B people.
+    The boat can only be rowed by a missionary or a cannibal.
+    There must never be more cannibals than missionaries on either bank.
+    
+    N = number of missionaries and cannibals
+    B = boat capacity
+    The state is a tuple (m, c, b) where:
+        m = number of missionaries on the left bank
+        c = number of cannibals on the left bank
+        b = boat position (1 if on the left bank, 0 if on the right bank)
+    Initial state: (N, N, 1)
+    Goal state: (0, 0, 0)
+    """)
+    print("Insert the number of missionaries and cannibals (N): ", end="")
+    nn = int(input())
+    print("Insert the boat capacity (B): ", end="")
+    bb = int(input())
+    run_game(nn, bb)
+
+if __name__ == "__main__":
+    main()

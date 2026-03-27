@@ -1,0 +1,34 @@
+(define (domain trasporto_costo)
+    (:requirements :typing :strips :action-cost)
+    (:types truck location quantity = object
+        refrigerated_truck - truck   
+    )
+    (:predicates
+        (at ?t - truck ?l - position)
+        (free_capcity ?t - truck ?q - quantity)
+        (demand_good ?l - location ?q - quantity)
+        (demand_good_chilled ?l - location ?q - quantity)
+        (plus1 ?q1 ?q2 - quantity)
+    )
+    (:functions
+        (distance ?l1 ?l2 - location)
+        (per_km_cost ?t - truck)
+        (total_cost)
+    )
+
+    (:action deliver
+        :parameters(?t - truck ?l - location ?d ?d_less_one ?c ?c_less_one - quantity)
+        :precondition( and
+            (at ?l ?d)
+            (free_capcity ?t ?c)
+            (plus1 ?d ?d_less_one)
+            (plus1 ?c ?c_less_one)
+        )
+        :effect( and
+            (not (demand_good ?l ?d))
+            (demand_good ?l ?d_less_one)
+            (not (free_capcity ?t ?c))
+            (free_capcity ?t ?c_less_one)
+        )
+    )
+)
