@@ -21,77 +21,71 @@ class MissionariesAndCannibals(Problem):
     def __init__(self, N=3, B=2):
         self.__dict__.update(initial=(N, N, 1), goal=(0, 0, 0), N=N, B=B)
 
-    def _is_valid(self, left_m, left_c):
+    def _is_valid(self, missionaries_on_the_left, cannibals_on_the_left):
         """ Check if a state is mathematically and logically valid. """
-        right_m = self.N - left_m
-        right_c = self.N - left_c
+        missionaries_on_the_right = self.N - missionaries_on_the_left
+        cannibals_on_the_right = self.N - cannibals_on_the_left
         
-        # State boundaries validation
-        if left_m < 0 or left_c < 0 or right_m < 0 or right_c < 0:
+        # Negatives
+        if missionaries_on_the_left < 0 or cannibals_on_the_left < 0 or missionaries_on_the_right < 0 or cannibals_on_the_right < 0:
             return False
         
         # Cannibals outnumber missionaries on either bank when missionaries are present
-        if (left_m > 0 and left_m < left_c) or (right_m > 0 and right_m < right_c):
+        if (missionaries_on_the_left > 0 and missionaries_on_the_left < cannibals_on_the_left) or (missionaries_on_the_right > 0 and missionaries_on_the_right < cannibals_on_the_right):
             return False
             
         return True
 
     def actions(self, state):
-        left_m, left_c, boat_side = state
+        missionaries_on_the_left, cannibals_on_the_left, boat_side = state
         
         actions_list = []
         if boat_side == 1:
-            max_m = min(left_m, self.B)
-            max_c = min(left_c, self.B)
-            for boat_m in range(0, max_m + 1):
-                for boat_c in range(0, max_c + 1):
+            max_m = min(missionaries_on_the_left, self.B)
+            max_c = min(cannibals_on_the_left, self.B)
+            for missionaries_on_the_boat in range(0, max_m + 1):
+                for cannibals_on_the_boat in range(0, max_c + 1):
                     # Valid load constraint
-                    if 1 <= boat_m + boat_c <= self.B:
+                    if 1 <= missionaries_on_the_boat + cannibals_on_the_boat <= self.B:
                         # Original constraint: never more cannibals than missionaries on the boat
-                        if boat_m > 0 and boat_m < boat_c:
+                        if missionaries_on_the_boat > 0 and missionaries_on_the_boat < cannibals_on_the_boat:
                             continue
                             
                         # Predict next state and append if safe
-                        if self._is_valid(left_m - boat_m, left_c - boat_c):
-                            actions_list.append((boat_m, boat_c))
+                        if self._is_valid(missionaries_on_the_left - missionaries_on_the_boat, cannibals_on_the_left - cannibals_on_the_boat):
+                            actions_list.append((missionaries_on_the_boat, cannibals_on_the_boat))
         else:
-            right_m = self.N - left_m
-            right_c = self.N - left_c
-            max_m = min(right_m, self.B)
-            max_c = min(right_c, self.B)
-            for boat_m in range(0, max_m + 1):
-                for boat_c in range(0, max_c + 1):
+            missionaries_on_the_right = self.N - missionaries_on_the_left
+            cannibals_on_the_right = self.N - cannibals_on_the_left
+            max_m = min(missionaries_on_the_right, self.B)
+            max_c = min(cannibals_on_the_right, self.B)
+            for missionaries_on_the_boat in range(0, max_m + 1):
+                for cannibals_on_the_boat in range(0, max_c + 1):
                     # Valid load constraint
-                    if 1 <= boat_m + boat_c <= self.B:
+                    if 1 <= missionaries_on_the_boat + cannibals_on_the_boat <= self.B:
                         # Original constraint: never more cannibals than missionaries on the boat
-                        if boat_m > 0 and boat_m < boat_c:
+                        if missionaries_on_the_boat > 0 and missionaries_on_the_boat < cannibals_on_the_boat:
                             continue
                             
                         # Predict next state and append if safe
-                        if self._is_valid(left_m + boat_m, left_c + boat_c):
-                            actions_list.append((boat_m, boat_c))
+                        if self._is_valid(missionaries_on_the_left + missionaries_on_the_boat, cannibals_on_the_left + cannibals_on_the_boat):
+                            actions_list.append((missionaries_on_the_boat, cannibals_on_the_boat))
                             
         return actions_list
     
     def result(self, state, action):
-        left_m, left_c, boat_side = state
-        boat_m, boat_c = action
+        missionaries_on_the_left, cannibals_on_the_left, boat_side = state
+        missionaries_on_the_boat, cannibals_on_the_boat = action
         if boat_side == 1:
-            return (left_m - boat_m, left_c - boat_c, 0)
+            return (missionaries_on_the_left - missionaries_on_the_boat, cannibals_on_the_left - cannibals_on_the_boat, 0)
         else:
-            return (left_m + boat_m, left_c + boat_c, 1)
-
-    def is_goal(self, state):
-        return state == self.goal
-
-    def action_cost(self, s, a, s1):
-        return 1
+            return (missionaries_on_the_left + missionaries_on_the_boat, cannibals_on_the_left + cannibals_on_the_boat, 1)
 
     def h(self, node):
-        left_m, left_c, boat_side = node.state
+        missionaries_on_the_left, cannibals_on_the_left, boat_side = node.state
         # A simple admissible heuristic: roughly estimate the minimum one-way trips needed.
         # It's an optimistic approximation.
-        return (left_m + left_c) / self.B
+        return (missionaries_on_the_left + cannibals_on_the_left) / self.B
 
 def run_game(nn=3, bb=2):
     mc_problem = MissionariesAndCannibals(N=nn, B=bb)
@@ -118,7 +112,7 @@ def run_game(nn=3, bb=2):
     for j in range(len(states)):
         m, c, b = states[j]
         
-        # Rendering the banks via python string manipulation
+        # Rendering the banks
         left_bank = "M " * m + "  " * (mc_problem.N - m) + "C " * c + "  " * (mc_problem.N - c)
         right_bank = "M " * (mc_problem.N - m) + "  " * m + "C " * (mc_problem.N - c) + "  " * c
         river = " ⛵🌊   " if b == 1 else "   🌊⛵ "
