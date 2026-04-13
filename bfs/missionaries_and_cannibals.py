@@ -77,13 +77,13 @@ class MissionariesAndCannibals(Problem):
         # It's an optimistic approximation.
         return (missionaries_on_the_left + cannibals_on_the_left) / self.B
 
-def run_game(nn=3, bb=2):
+def run_game(nn=3, bb=2, algorithm=astar_search):
     mc_problem = MissionariesAndCannibals(N=nn, B=bb)
     print(f"\nMissionaries and Cannibals problem (N={mc_problem.N}, B={mc_problem.B})")
     print("-" * 65)
     
     try:
-        solution = astar_search(mc_problem)
+        solution = algorithm(mc_problem)
     except NameError:
         # Fallback if astar_search is entirely missing from problem imports (just in case)
         print("ERROR: astar_search not found in imports.")
@@ -160,7 +160,30 @@ def main():
         except ValueError:
             print("Invalid input! Please enter a valid integer number.\n")
             
-    run_game(nn, bb)
+    print("\n" + "=" * 65)
+    print("ASTAR SEARCH")
+    print("=" * 65)
+    run_game(nn, bb, astar_search)
+    
+    print("\n" + "=" * 65)
+    print("GREEDY BFS")
+    print("=" * 65)
+    run_game(nn, bb, greedy_bfs)
+    
+    print("\n" + "=" * 65)
+    print("UNIFORM COST SEARCH")
+    print("=" * 65)
+    run_game(nn, bb, uniform_cost_search)
+
+    print("\n" + "=" * 65)
+    print("BREADTH FIRST SEARCH")
+    print("=" * 65)
+    run_game(nn, bb, breadth_first_bfs)
+    
+    print("\n" + "=" * 65)
+    print("DEPTH FIRST SEARCH")
+    print("=" * 65)
+    run_game(nn, bb, depth_first_bfs)
 
 if __name__ == "__main__":
     main()
