@@ -1,41 +1,45 @@
-# Missionaries and Cannibals - University Project
+# Cannibali e Missionari - Algoritmi di Ricerca
 
-## Overview
-This project is an implementation of the classic Missionaries and Cannibals river crossing puzzle using Artificial Intelligence search algorithms. It models the problem space, formulates valid states and transitions, and finds optimal or sub-optimal paths to the solution using different search strategies.
+Realizzato da Giuseppe Pasquale Caligiure (Mat. 280867)
 
-The objective of the puzzle is to move `N` missionaries and `N` cannibals from the left bank of a river to the right bank using a boat that can hold at most `B` people. The core logical constraint is that at any time, on either bank, the number of cannibals cannot outnumber the number of missionaries (if there are any missionaries present), otherwise the missionaries will be eaten.
+## Panoramica
+Questo progetto è un'implementazione del classico problema di *river-crossing* "Missionari e Cannibali" utilizzando algoritmi di ricerca dell'Intelligenza Artificiale. Il programma, realizzato utilizzando il framework proposto dal docente, modella lo spazio del problema, definisce la validità degli stati e delle transizioni, e trova i percorsi ottimali o sub-ottimali verso la soluzione usando diverse strategie di ricerca.
 
-## How the Program Works
-1. **Problem Formulation**: The game state is represented as a tuple `(m, c, b)`, where:
-   - `m`: Number of missionaries on the left bank.
-   - `c`: Number of cannibals on the left bank.
-   - `b`: The position of the boat (`1` for the left bank, `0` for the right bank).
+L'obiettivo del puzzle è spostare `N` missionari e `N` cannibali dalla riva sinistra di un fiume alla riva destra utilizzando una barca che può contenere al massimo `B` persone. Il vincolo logico fondamentale è che in qualsiasi momento, su entrambe le rive, il numero di cannibali non può superare il numero di missionari (se ci sono missionari presenti), altrimenti i missionari verranno mangiati.
+
+## Come Funziona il Programma
+1. **Formulazione del Problema**: Lo stato del gioco è rappresentato come una tupla `(m, c, b)`, dove:
+   - `m`: Numero di missionari sulla riva sinistra.
+   - `c`: Numero di cannibali sulla riva sinistra.
+   - `b`: La posizione della barca (`1` per la riva sinistra, `0` per la riva destra).
    
-2. **Interactive Execution**: Upon startup, the program prompts the user to input custom values:
-   - `N`: The total number of missionaries and cannibals.
-   - `B`: The maximum passenger capacity of the boat.
+   Il numero di missionari e cannibali sulla riva destra è dato da `N - m` e `N - c` rispettivamente.
    
-3. **Algorithms Evaluated**: To demonstrate the AI problem-solving approach, the program automatically runs the puzzle through multiple search algorithms and prints the steps and solution for each:
-   - **A* Search** (using an optimistic heuristic calculating the roughly estimated one-way trips)
+2. **Esecuzione Interattiva**: All'avvio, il programma chiede all'utente di inserire dei parametri personalizzati:
+   - `N`: Il numero totale di missionari e cannibali.
+   - `B`: La capacità massima di passeggeri della barca.
+   
+3. **Algoritmi Valutati**: Per dimostrare l'approccio di risoluzione dei problemi tramite IA, il programma esegue automaticamente il puzzle attraverso molteplici algoritmi di ricerca e stampa i passaggi e la soluzione per ciascuno:
+   - **A\* Search** (usando un'euristica ottimistica che calcola una stima dei viaggi di sola andata)
    - **Greedy Best-First Search**
-   - **Uniform Cost Search**
-   - **Breadth-First Search (BFS)**
-   - **Depth-First Search (DFS)**
+   - **Uniform Cost Search (Ricerca a Costo Uniforme)**
+   - **Breadth-First Search (Ricerca in Ampiezza)**
+   - **Depth-First Search (Ricerca in Profondità)**
    
-4. **Visualisation**: The terminal renders an ASCII-based step-by-step visual display of the banks and the boat crossing the river (`🌊⛵`) alongside the action (e.g., `2M, 0C crossing right`) for each algorithm's found solution.
+4. **Visualizzazione**: Il terminale renderizza una visualizzazione visiva passo-passo delle rive e della barca che attraversa il fiume (`🌊⛵`) insieme all'azione eseguita (es. `2M, 1C crossing right`) per la soluzione trovata da ogni singolo algoritmo.
 
-## How to Run the Program
+## Come Avviare il Programma
 
-1. Open your terminal.
-2. Navigate to the project directory containing the `missionaries_and_cannibals.py` script.
-3. Run the script using Python by entering the following command:
+1. Aprire il terminale.
+2. Navigare all'interno della directory del progetto contenente lo script `missionaries_and_cannibals.py`.
+3. Eseguire lo script utilizzando Python inserendo il seguente comando:
 
 ```bash
 python missionaries_and_cannibals.py
 ```
 
-4. Follow the on-screen prompts to interact with the command-line interface. Provide the requested strictly positive integer values (for example, `N=3`, `B=2`) and press `Enter`. The solutions for each Search Algorithm will then be visually printed out.
+4. Seguire le istruzioni a schermo per interagire con l'interfaccia a riga di comando. Fornire i valori interi strettamente positivi richiesti (per esempio, `N=3`, `B=2`) e premere `Invio`. Le soluzioni per ciascun Algoritmo di Ricerca verranno immediatamente stampate a schermo.
 
-## Prerequisites
-- Python 3.x installed on your machine.
-- All included project files (`missionaries_and_cannibals.py`, `problem.py`, `bfs_algorithms.py`) must be located in the same folder.
+## Prerequisiti
+- Python 3.x installato sul proprio computer.
+- Tutti i file di progetto inclusi (`missionaries_and_cannibals.py`, `problem.py`, `bfs_algorithms.py`) devono trovarsi all'interno della stessa cartella.
