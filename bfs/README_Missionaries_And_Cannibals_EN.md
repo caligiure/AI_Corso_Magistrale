@@ -1,7 +1,11 @@
 # Missionaries and Cannibals - University Project
 
+Author: Giuseppe Pasquale Caligiure (Mat. 280867)
+
+Available on GitHub: https://github.com/caligiure/AI_Corso_Magistrale/tree/main/bfs
+
 ## Overview
-This project is an implementation of the classic Missionaries and Cannibals river crossing puzzle using Artificial Intelligence search algorithms. It models the problem space, formulates valid states and transitions, and finds optimal or sub-optimal paths to the solution using different search strategies.
+This project is an implementation of the classic Missionaries and Cannibals river crossing puzzle using Artificial Intelligence search algorithms. This program, **realized using the framework proposed by the professor**, models the problem space, formulates valid states and transitions, and finds optimal or sub-optimal paths to the solution using different search strategies.
 
 The objective of the puzzle is to move `N` missionaries and `N` cannibals from the left bank of a river to the right bank using a boat that can hold at most `B` people. The core logical constraint is that at any time, on either bank, the number of cannibals cannot outnumber the number of missionaries (if there are any missionaries present), otherwise the missionaries will be eaten.
 

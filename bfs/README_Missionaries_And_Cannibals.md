@@ -2,8 +2,10 @@
 
 Realizzato da Giuseppe Pasquale Caligiure (Mat. 280867)
 
+Disponibile su GitHub: https://github.com/caligiure/AI_Corso_Magistrale/tree/main/bfs
+
 ## Panoramica
-Questo progetto è un'implementazione del classico problema di *river-crossing* "Missionari e Cannibali" utilizzando algoritmi di ricerca dell'Intelligenza Artificiale. Il programma, realizzato utilizzando il framework proposto dal docente, modella lo spazio del problema, definisce la validità degli stati e delle transizioni, e trova i percorsi ottimali o sub-ottimali verso la soluzione usando diverse strategie di ricerca.
+Questo progetto è un'implementazione del classico problema di *river-crossing* "Missionari e Cannibali" utilizzando algoritmi di ricerca dell'Intelligenza Artificiale. Il programma, **realizzato utilizzando il framework proposto dal docente**, modella lo spazio del problema, definisce la validità degli stati e delle transizioni, e trova i percorsi ottimali o sub-ottimali verso la soluzione usando diverse strategie di ricerca.
 
 L'obiettivo del puzzle è spostare `N` missionari e `N` cannibali dalla riva sinistra di un fiume alla riva destra utilizzando una barca che può contenere al massimo `B` persone. Il vincolo logico fondamentale è che in qualsiasi momento, su entrambe le rive, il numero di cannibali non può superare il numero di missionari (se ci sono missionari presenti), altrimenti i missionari verranno mangiati.
 
