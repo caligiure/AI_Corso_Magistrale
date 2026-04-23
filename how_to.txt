@@ -1,0 +1,3 @@
+How to activate python virtual environment (venv)
+Linux: source ./.venv/bin/activate
+Windows: .\.venv\Scripts\activate
