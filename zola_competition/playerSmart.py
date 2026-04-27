@@ -19,19 +19,21 @@ def evaluate_state(game, state, root_player):
 
     opponent = game.opponent(root_player)
 
-    # Vantaggio di materiale
+    # Vantaggio di materiale (pezzi_nostri - pezzi_avversari)
     root_count = state.count(root_player)
     opponent_count = state.count(opponent)
 
-    # Mobilità e potenziale di cattura
+    # Mobilità e potenziale di cattura (mosse_nostre - mosse_avversarie)
     root_moves = game._actions_for_player(state, root_player)
     opponent_moves = game._actions_for_player(state, opponent)
 
-    root_captures = sum(1 for m in root_moves if m[2] is True)
-    opponent_captures = sum(1 for m in opponent_moves if m[2] is True)
-
     root_mobility = len(root_moves)
     opponent_mobility = len(opponent_moves)
+
+    # Mosse di cattura (mosse di cattura nostre - mosse di cattura avversarie)
+    # Tuple: ((from_r, from_c), (to_r, to_c), is_capture)
+    root_captures = sum(1 for m in root_moves if m[2] is True)
+    opponent_captures = sum(1 for m in opponent_moves if m[2] is True)
 
     # Formula di punteggio (pesi regolabili)
     score = 0
