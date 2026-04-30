@@ -7,8 +7,8 @@ import time
 
 # EXAMPLE VERSION
 # #######################
-import playerExampleRandom as playerBmodule
-import playerExampleAlpha as playerRmodule
+import aggressivePlayer as playerRmodule
+import playerCustom as playerBmodule
 # #######################
 
 class Game:

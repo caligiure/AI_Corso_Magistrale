@@ -3,7 +3,7 @@ import random
 
 
 # Profondita di ricerca fissa. Puoi cambiarla senza toccare il resto del file.
-SEARCH_DEPTH = 2
+SEARCH_DEPTH = 3
 
 
 def evaluate_state(game, state, root_player):

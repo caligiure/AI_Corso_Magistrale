@@ -174,4 +174,5 @@ def playerStrategy(game, state, timeout=3):
         # Restituiamo la mossa migliore trovata alla profondità precedente completata
         pass
         
+    print(f"[AI {state.to_move}] Profondità raggiunta: {depth-1}. Mossa scelta: {best_move}")
     return best_move
