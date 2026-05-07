@@ -8,7 +8,7 @@ import time
 # EXAMPLE VERSION
 # #######################
 import wisePlayerOptimized as playerBmodule
-import wisePlayer as playerRmodule
+import playerSuperSupremo as playerRmodule
 # #######################
 
 class Game:
