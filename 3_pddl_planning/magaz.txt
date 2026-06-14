@@ -1,0 +1,61 @@
+(define (domain magaz)
+    (:requirements :strips :typing)
+
+    (:types robot crate location)
+
+    (:predicates 
+        (isAt ?r - robot ?loc - location)
+        (isAtCrate ?c - crate ?loc - location)
+        (handempty ?r - robot)
+        (holding ?r - robot ?c - crate)
+    )
+
+    (:action move
+        :parameters (?r - robot ?from - location ?to - location)
+        :precondition (
+            (isAt ?r ?from)
+        )
+        :effect (
+            (and
+                (isAt ?r ?to)
+                (not(isAt ?r ?from))
+            )
+        )
+    )
+
+    (:action pick-up
+        :parameters (?r - robot ?c - crate ?loc - location)
+        :precondition (
+            (and 
+                (isAt ?r ?loc)
+                (isAtCrate ?c ?loc)
+                (handempty ?r)
+            )
+        )
+        :effect(
+            (and
+                (not(isAtCrate ?c ?loc))
+                (not(handempty ?r))
+                (holding ?r ?c)
+            )
+        )
+    )
+
+    (:action drop
+        :parameters (?r - robot ?c - crate ?loc - location)
+        :precondition (
+            (and
+                (isAt ?r ?loc)
+                (not(handempty ?r))
+                (holding ?r ?c)
+            )
+        )
+        :effect(
+            (and
+                (isAtCrate ?c ?loc)
+                (handempty ?r)
+                (not(holding ?r ?c))
+            )
+        )
+    )
+)

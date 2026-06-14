@@ -1,0 +1,23 @@
+(define (problem magaz_prob)
+    (:domain magaz)
+
+    (:objects 
+        A B C - location
+        R1 - robot
+        C1 C2 - crate
+    )
+
+    (:init
+        (isAt R1 A)
+        (handempty R1)
+        (isAtCrate C1 B)
+        (isAtCrate C2 C)
+    )
+
+    (:goal
+        (and
+            (isAtCrate C1 A)
+            (isAtCrate C2 A)
+        )
+    )
+)

@@ -1,0 +1,42 @@
+(:define (domain torre_di_hanoi)
+    (: requirements :strips :typing)
+
+    (:types 
+        ring
+        stick
+    )
+
+    (:predicates
+        (on ?x - ring ?y - ring ?s - stick)
+        (clear ?x - ring)
+        (empty ?s - stick)
+        (handempty)
+        (holding ?x - ring)
+        (onBase ?x - ring ?s - stick)
+        (smaller ?x - ring ?y - ring)
+    )
+
+    (:action pickFromStick
+        :parameters (?x - ring ?y - ring ?from - stick)
+        :precondition (and (clear ?x) (on ?x ?y ?from) (handempty))
+        :effect (and (holding ?x) (clear ?y) (not (on ?x ?y ?from)) (not (handempty)) (not (clear ?x)))
+    )
+
+    (:action pickFromBase
+        :parameters (?x - ring ?from - stick)
+        :precondition (and (clear ?x) (onBase ?x ?from) (handempty))
+        :effect (and (holding ?x) (empty ?from) (not (onBase ?x ?from)) (not (handempty)) (not clear ?x))
+    )
+
+    (:action putOnEmptyStick
+        :parameters (?x - ring ?to - stick)
+        :precondition (and (holding ?x) (empty ?to))
+        :effect (and (onBase ?x ?to) (clear ?x) (not (holding ?x)) (not (empty ?to)) (handempty))
+    )
+
+    (:action putOnStick
+        :parameters (?x - ring ?y - ring ?r - ring ?to - stick)
+        :precondition (and (holding ?x) (smaller ?x ?y) (clear ?y) (or (on ?y ?r ?to) (onBase ?y ?to)))
+        :effect (and (on ?x ?y ?to) (clear ?x) (not (holding ?x)) (handempty) (not (clear ?y)))
+    )
+)

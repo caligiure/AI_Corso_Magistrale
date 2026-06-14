@@ -1,0 +1,43 @@
+(define (problem torre_di_hanoi_problem)
+    (:domain torre_di_hanoi)
+
+    (:objects
+        A B C D E - ring
+        S1 S2 S3 - stick
+    )
+
+    (:init
+        (clear A)
+        (on A B S1)
+        (smaller A B)
+        (smaller A C)
+        (smaller A D)
+        (smaller A E)
+        (on B C S1)
+        (smaller B C)
+        (smaller B D)
+        (smaller B E)
+        (on C D S1)
+        (smaller C D)
+        (smaller C E)
+        (on D E S1)
+        (smaller D E)
+        (onBase E S1)
+        (handempty)
+        (empty S2)
+        (empty S3)
+    )
+
+    (:goal
+        (and
+            (on A B S3)
+            (on B C S3)
+            (on C D S3)
+            (on D E S3)
+            (onBase E S3)
+            (clear A)
+            (empty S1)
+            (empty S2)
+        )
+    )
+)
